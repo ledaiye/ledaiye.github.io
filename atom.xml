@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>凉城Lc</title>
-  <icon>https://www.gravatar.com/avatar/3af0be4ed9ad6fd6cc67a6b0671e7d32</icon>
+  
   <subtitle>真正的不自由，是在自己的心中设下牢笼</subtitle>
   <link href="/atom.xml" rel="self"/>
   
@@ -11,7 +11,7 @@
   
   <author>
     <name>凉城Lc</name>
-    <email>ledaiye@gmail.com</email>
+    
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
