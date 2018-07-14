@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://airs-sec.com/"/>
-  <updated>2018-07-13T15:23:19.612Z</updated>
+  <updated>2018-07-14T12:45:13.829Z</updated>
   <id>http://airs-sec.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux就该这么学-3</title>
+    <link href="http://airs-sec.com/2018/07/14/linux%E5%B0%B1%E8%AF%A5%E8%BF%99%E4%B9%88%E5%AD%A6-3/"/>
+    <id>http://airs-sec.com/2018/07/14/linux就该这么学-3/</id>
+    <published>2018-07-14T12:37:31.000Z</published>
+    <updated>2018-07-14T12:45:13.829Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>管道符、重定向与环境变量</p></blockquote><h1 id="管道符命令"><a href="#管道符命令" class="headerlink" title="管道符命令"></a>管道符命令</h1><blockquote><p>管道符“|”将前一个命令的输出作为后一个命令的输入，格式：命令A | 命令B，将各个命令连接起来使用，可以构造出很强大的语法。</p></blockquote><p>统计不允许登录用户的个数</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# cat /etc/passwd | grep &quot;/sbin/nologin&quot;</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">adm:x:3:4:adm:/var/adm:/sbin/nologin</span><br><span class="line">lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin</span><br><span class="line">mail:x:8:12:mail:/var/spool/mail:/sbin/nologin</span><br><span class="line">uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin</span><br><span class="line">operator:x:11:0:operator:/root:/sbin/nologin</span><br><span class="line">games:x:12:100:games:/usr/games:/sbin/nologin</span><br><span class="line">gopher:x:13:30:gopher:/var/gopher:/sbin/nologin</span><br><span class="line">ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin</span><br><span class="line">nobody:x:99:99:Nobody:/:/sbin/nologin</span><br><span class="line">dbus:x:81:81:System message bus:/:/sbin/nologin</span><br><span class="line">vcsa:x:69:69:virtual console memory owner:/dev:/sbin/nologin</span><br><span class="line">saslauth:x:499:76:&quot;Saslauthd user&quot;:/var/empty/saslauth:/sbin/nologin</span><br><span class="line">postfix:x:89:89::/var/spool/postfix:/sbin/nologin</span><br><span class="line">sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin</span><br><span class="line">test:x:8888:8888::/home/testuser:/sbin/nologin</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# cat /etc/passwd | grep &quot;/sbin/nologin&quot; | wc -l</span><br><span class="line">17</span><br></pre></td></tr></table></figure><h2 id="输入与输出重定向"><a href="#输入与输出重定向" class="headerlink" title="输入与输出重定向"></a>输入与输出重定向</h2><ul><li>标准输入，STDIN，文件描述符为0</li><li>标准输出，STDOUT，文件描述符为1</li><li>错误输出，STDERR，文件描述符为2</li></ul><blockquote><p>输出重定向</p></blockquote><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531572032721.jpg" alt="STDOUT"></p><p><strong>$1代表定位符，$0代表命令，$1代表之后的参数（文件），有多个文件则往后追加$2,$…</strong></p><blockquote><p>输入重定向</p></blockquote><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531572073609.jpg" alt="STDIN"></p><blockquote><p>命令行通配符</p></blockquote><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531572093860.jpg" alt="通配符"></p><p><strong>通配符可以在很多地方使用，如shell，vim，grep，find命令进行搜索。</strong></p><blockquote><p>特殊字符扩展</p></blockquote><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531572128341.jpg" alt="特殊字符扩展"></p><h1 id="实用的PATH变量"><a href="#实用的PATH变量" class="headerlink" title="实用的PATH变量"></a>实用的PATH变量</h1><blockquote><p>环境变量通常是全局变量，在执行一个命令的时候，通常先看下这条命令是否在环境的设置当中，如果是，直接执行命令，如果系统搜索了一遍之后，当前命令不在环境变量的设置当中，那么执行不了当前命令，只能到命令所在的目录下通过绝对路径的方式运行。</p></blockquote><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul><li>永久性：需要用户修改配置文件，变量永久生效。</li><li>暂时性：用户通过export命令进行设置，关闭shell后失效。</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH = $PATH:/root/bin</span><br></pre></td></tr></table></figure><h2 id="按作用域划分"><a href="#按作用域划分" class="headerlink" title="按作用域划分"></a>按作用域划分</h2><blockquote><p>系统变量：全局生效</p></blockquote><p>1、<code>/etc/environment</code></p><p>适合加入全局变量，对整个系统生效</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/environment</span><br><span class="line">PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&quot;</span><br></pre></td></tr></table></figure><p>2、<code>/etc/profile和/etc/profile.d/*Shell脚本</code></p><blockquote><p>用户变量：当前用户</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/.profile</span><br><span class="line"></span><br><span class="line">~/.bashrc</span><br></pre></td></tr></table></figure><p><strong>当前用户家目录下的profile文件，仅对当前用户生效。</strong></p><p><a href="https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux-unix" target="_blank" rel="noopener">https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux-unix</a></p><h2 id="设置方式："><a href="#设置方式：" class="headerlink" title="设置方式："></a>设置方式：</h2><ul><li><p>确定设置变量类型</p></li><li><p>编辑对应的文件，在文件内容尾部加入：</p></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH = $ PATH:xxx</span><br><span class="line"></span><br><span class="line">export PATH=&quot;/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games&quot;</span><br></pre></td></tr></table></figure><p><strong>各个路径之间用“:”隔开</strong></p><h2 id="设置别名"><a href="#设置别名" class="headerlink" title="设置别名"></a>设置别名</h2><p>1、alias 设置别名</p><blockquote><p>格式：alias 别名=命令</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias ll = &quot;ls -l&quot;</span><br></pre></td></tr></table></figure><p>2、unalias 取消别名设置</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unalias ll</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;管道符、重定向与环境变量&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;管道符命令&quot;&gt;&lt;a href=&quot;#管道符命令&quot; class=&quot;headerlink&quot; title=&quot;管道符命令&quot;&gt;&lt;/a&gt;管道符命令&lt;/h1&gt;&lt;blockquote&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="阅读" scheme="http://airs-sec.com/categories/%E9%98%85%E8%AF%BB/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>linux就该这么学-2</title>
@@ -452,27 +479,6 @@
     
       <category term="渗透" scheme="http://airs-sec.com/categories/%E6%B8%97%E9%80%8F/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>sqlmap之X-Forwarded-Host注入</title>
-    <link href="http://airs-sec.com/2017/08/26/sqlmap%E4%B9%8BX-Forwarded-Host%E6%B3%A8%E5%85%A5/"/>
-    <id>http://airs-sec.com/2017/08/26/sqlmap之X-Forwarded-Host注入/</id>
-    <published>2017-08-26T07:55:08.000Z</published>
-    <updated>2018-07-14T02:07:13.462Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://github.com/ledaiye" target="_blank" rel="noopener"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://obgutsg63.bkt.clouddn.com/yuanchuang_light4.png" alt="原创" data-canonical-src="http://obgutsg63.bkt.clouddn.com/yuanchuang_light4.png"></a></p><p><code>在帮客户测试的时候，通过awvs发现了一个X-Forwarded-Host注入点，也是头一次见到这种注入，也就到乌云上看看是否有类似的案例，只发现了</code><a href="http://wooyun.jozxing.cc/static/bugs/wooyun-2014-047595.html" target="_blank" rel="noopener">我是这样挖掘x-forwarded-for注入到成功注射的</a><code>，这个案例中讲到了x-forwarded-for注入，按照这种思路，将sqlmap的-p参数改成X-Forwarded-Host即可 注入成功。</code></p><a id="more"></a><p>#注入的包#</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">GET /xxx HTTP/1.1</span><br><span class="line">Referer: http://www.google.com/search?hl=en&amp;q=testing</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.21 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.21</span><br><span class="line">Client-IP: 127.0.0.1</span><br><span class="line">X-Forwarded-For: 127.0.0.1</span><br><span class="line">X-Forwarded-Host: *</span><br><span class="line">Accept-Language: en</span><br><span class="line">Via: 1.1 wa.www.test.com</span><br><span class="line">Origin: http://www.test.com/</span><br><span class="line">X-Requested-With: XMLHttpRequest</span><br><span class="line">Cookie: testcookie=yes; lang=eng</span><br><span class="line">Host: xxxx</span><br><span class="line">Connection: Keep-alive</span><br><span class="line">Accept-Encoding: gzip,deflate</span><br><span class="line">Accept: */*</span><br></pre></td></tr></table></figure><p><code>X-Forwarded-Host: *的参数改成*号</code></p><p><code>结果如下</code></p><p><code>sqlmap设置如下，将注入的包放入data.txt中，使用sqlmap的-r参数载入包：</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r data.txt -p &quot;X-Forwarded-Host&quot; --level 3 --risk 3 -D webmail --tables</span><br></pre></td></tr></table></figure><p><img src="http://obgutsg63.bkt.clouddn.com/123.png" alt="结果如下"></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://github.com/ledaiye&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;img style=&quot;position: absolute; top: 0; right: 0; border: 0;&quot; src=&quot;http://obgutsg63.bkt.clouddn.com/yuanchuang_light4.png&quot; alt=&quot;原创&quot; data-canonical-src=&quot;http://obgutsg63.bkt.clouddn.com/yuanchuang_light4.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;在帮客户测试的时候，通过awvs发现了一个X-Forwarded-Host注入点，也是头一次见到这种注入，也就到乌云上看看是否有类似的案例，只发现了&lt;/code&gt;&lt;a href=&quot;http://wooyun.jozxing.cc/static/bugs/wooyun-2014-047595.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;我是这样挖掘x-forwarded-for注入到成功注射的&lt;/a&gt;&lt;code&gt;，这个案例中讲到了x-forwarded-for注入，按照这种思路，将sqlmap的-p参数改成X-Forwarded-Host即可 注入成功。&lt;/code&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="渗透" scheme="http://airs-sec.com/tags/%E6%B8%97%E9%80%8F/"/>
     
   </entry>
   
