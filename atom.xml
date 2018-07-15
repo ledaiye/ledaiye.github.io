@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://airs-sec.com/"/>
-  <updated>2018-07-14T12:46:45.530Z</updated>
+  <updated>2018-07-15T16:00:23.875Z</updated>
   <id>http://airs-sec.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mobile-Security-Framework-MobSF</title>
+    <link href="http://airs-sec.com/2018/07/15/Mobile-Security-Framework-MobSF/"/>
+    <id>http://airs-sec.com/2018/07/15/Mobile-Security-Framework-MobSF/</id>
+    <published>2018-07-15T15:48:43.000Z</published>
+    <updated>2018-07-15T16:00:23.875Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Mobile-Security-Framework-MobSF是一个自动、一体化移动应用 (Android/iOS/Windows) 测试框架，并且可以进行静态分析，动态分析，恶意软件分析和Web API测试。</p></blockquote><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1486603.jpg" alt="enter description here" title="Mobile-Security-Framework-MobSF"></p><a id="more"></a><h1 id="如何部署"><a href="#如何部署" class="headerlink" title="如何部署"></a>如何部署</h1><p>MSF利用docker进行部署，docker镜像如下：</p><p>docker镜像地址：</p><p><a href="https://hub.docker.com/r/opensecurity/mobile-security-framework-mobsf/" target="_blank" rel="noopener">https://hub.docker.com/r/opensecurity/mobile-security-framework-mobsf/</a></p><blockquote><p>利用docker进行部署：</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull opensecurity/mobile-security-framework-mobsf</span><br><span class="line">docker run -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf:latest</span><br></pre></td></tr></table></figure><p><strong>注：在实际的安装部署中，我使用的环境是深度linux操作系统，安装过程时间较长，建议翻墙。</strong></p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531669872827.jpg" alt="1"></p><p>安装成功之后，访问localhost:8000即可访问web界面。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531669889027.jpg" alt="2"></p><p>上传app进行测试。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531669902329.jpg" alt="3"></p><p>将apk文件拖入即可上传，上传完之后就开始进行分析。</p><p>分析完成之后，如下：</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531669914892.jpg" alt="4"></p><p>这里使用的apk文件为drozer中提供的sieve.apk文件，sieve.apk文件本身就被设计来进行apk漏洞测试，该文件包含各类漏洞，便于我们进行分析测试。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531669927160.jpg" alt="5"></p><p>这里列出了，各个组件的相关信息。</p><p>往下，还有个查看代码的模块。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531669940401.jpg" alt="6"></p><p>点击<code>“View Java”</code>，查看java的源码，以类名.java类进行划分，点击具体的类，进入到详情页面。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531669992500.jpg" alt="7"></p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531670063626.jpg" alt="9"></p><p>点击右侧的<code>“Download Java Code”</code>,即可将java源码下载至本地。</p><p>点击“View Smali”，即可查看Smali源码。同样，是以类名.smali进行区分。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531670070006.jpg" alt="10"></p><p>点击相应的类名.smali，即可进入smali代码的详情页面。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531670085565.jpg" alt="11"></p><p>点击左侧的“Permissions”，可查看android权限。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531670109506.jpg" alt="12"></p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531670117449.jpg" alt="13"></p><p>点击左侧<code>“Security Analysis”</code>模块下的<code>“Code Analysis”</code>进行代码分析，这里会列出相应的问题，针对具体的问题，我们可以开始进行漏洞验证。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531670131446.jpg" alt="14"></p><p>找到一条关于SQLite数据库注入相关的，点击右侧的<code>“com/mwr/example/sieve/PWDBHelper.java ”</code>，查看相应的java类代码。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531670155274.jpg" alt="15"></p><p>可以看到<code>DATABASE_NAME=“database.db”</code>，我们通过模拟器的SQLite编辑器找到这个db文件，apk数据一般存储在/data/data/包名/databases目录下。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531670167567.jpg" alt="16"></p><p>双击打开db文件。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531670178392.jpg" alt="17"></p><p>点击“Passwords”字段。</p><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531670190616.jpg" alt="18"></p><p><code>sieve.apk</code>利用SQLite数据库的方式进行数据存储，通过创建<code>SQLiteOpenHelper</code> 的子类并覆盖<code>onCreate()</code>方法，在此方法中，可以执行 SQLite 命令以创建数据库中的表。</p><hr><p><strong>注：</strong></p><p>apk的数据保存方式一般分为以下几种：</p><ul><li>共享首选项：在键值对中存储私有原始数据。</li><li>内部存储：在设备内存中存储私有数据。</li><li>外部存储：在共享的外部存储中存储公共数据。</li><li>SQLite 数据库：在私有数据库中存储结构化数据。</li><li>网络连接：在网络中使用您自己的网络服务器存储数据。</li></ul><p>其他的使用方法还在摸索中，相比<code>http://jaq.alibaba.com</code>和<code>http://appscan.360.cn</code>感觉还时可以的，但很多地方需要能看得懂源代码。</p><p><a href="https://developer.android.com/guide/topics/data/data-storage" target="_blank" rel="noopener">https://developer.android.com/guide/topics/data/data-storage</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Mobile-Security-Framework-MobSF是一个自动、一体化移动应用 (Android/iOS/Windows) 测试框架，并且可以进行静态分析，动态分析，恶意软件分析和Web API测试。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://obgutsg63.bkt.clouddn.com/blog/1486603.jpg&quot; alt=&quot;enter description here&quot; title=&quot;Mobile-Security-Framework-MobSF&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="渗透" scheme="http://airs-sec.com/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>linux就该这么学-3</title>
@@ -455,29 +478,6 @@
     
     
       <category term="移动应用" scheme="http://airs-sec.com/tags/%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>App测试之LDAP注入</title>
-    <link href="http://airs-sec.com/2017/08/28/App%E6%B5%8B%E8%AF%95%E4%B9%8BLDAP%E6%B3%A8%E5%85%A5/"/>
-    <id>http://airs-sec.com/2017/08/28/App测试之LDAP注入/</id>
-    <published>2017-08-28T02:26:19.000Z</published>
-    <updated>2017-08-28T04:04:36.796Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p><code>在对客户的实际环境的测试中，有一套内部办公系统，需要对这套系统进行测试，这套系统主要为一个APP（安卓版），由于是安装在手机上的App,所以需要通过抓包把App的访问通过电脑的抓包软件进行抓包分析。</code></p><p>-App测试也是第一次接触，所以在测试时参考了相关资料-</p><h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p><code>测试App</code> <code>burpsuite</code></p><h3 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h3><p>1.手机上设置代理</p><p>在手机（我这是小米note）的设置选项里，找到wlan的代理选项，填写你在burpsuite中设置的地址和端口（这个地址和端口和burpsuite中设置的需要一样）。</p><p><img src="http://obgutsg63.bkt.clouddn.com/Screenshot_2017-08-28-10-43-00-269_com.android.se.png" alt="手机代理"></p><p>2.电脑上burpsuite中设置代理，并启用代理选项</p><p><img src="http://obgutsg63.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170828114830.png" alt="burpsuite"></p><p><img src="http://obgutsg63.bkt.clouddn.com/%E9%80%92%E5%9B%9B%E6%96%B9%E9%80%9F%E9%80%92.png" alt="burpsuite"></p><p>设置好之后，开始抓包即可。</p><p><code>之后的操作和浏览器抓包一样了</code></p><h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><h3 id="LDAP注入"><a href="#LDAP注入" class="headerlink" title="LDAP注入"></a>LDAP注入</h3><p><code>需要了解LDAP注入的可以看wooyun的这篇文章，</code><a href="http://wooyun.jozxing.cc/static/drops/tips-967.html" target="_blank" rel="noopener">LDAP注入与防御剖析</a>，<code>这篇文章中，详细介绍了LDAP注入的相关知识。</code></p><p>-截取文章中的一段-</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">5.1 AND盲注</span><br><span class="line"></span><br><span class="line">假设一个Web应用想从一个LDAP目录列出所有可用的Epson打印机，错误信息不会返回，应用发送如下的过滤器：         </span><br><span class="line"></span><br><span class="line">(&amp;(objectClass=printer)(type=Epson*))</span><br><span class="line">使用这个查询，如果有可用的Epson打印机，其图标就会显示给客户端，否则没有图标出现。如果攻击者进行LDAP盲注入攻击</span><br><span class="line"></span><br><span class="line">*)(objectClass=*))(&amp;(objectClass=void</span><br><span class="line">Web应用会构造如下查询：      </span><br><span class="line"></span><br><span class="line">(&amp;(objectClass=*)(objectClass=*))(&amp;(objectClass=void)(type=Epson*))</span><br><span class="line">仅第一个LDAP过滤器会被处理：</span><br><span class="line"></span><br><span class="line">(&amp;(objectClass=*)(objectClass=*))</span><br><span class="line">结果是，打印机的图标一定会显示到客户端，因为这个查询总是会获得结果：过滤器objectClass=*总是返回一个对象。当图标被显示时响应为真，否则为假。</span><br><span class="line"></span><br><span class="line">从这一点来看，使用盲注技术比较容易，例如构造如下的注入：         </span><br><span class="line"></span><br><span class="line">(&amp;(objectClass=*)(objectClass=users))(&amp;(objectClass=foo)(type=Epson*))</span><br><span class="line">(&amp;(objectClass=*)(objectClass=resources))(&amp;(objectClass=foo)(type=Epson*))</span><br><span class="line">这种代码注入的设置允许攻击者推测可能存在于LDAP目录服务中不同对象类的值。当响应Web页面至少包含一个打印机图标时，对象类的值就是存在的，另一方面而言，如果对象类的值不存在或没有对它的访问，就不会有图标出现。</span><br><span class="line"></span><br><span class="line">LDAP盲注技术让攻击者使用基于TRUE/FALSE的技术访问所有的信息。</span><br></pre></td></tr></table></figure><p>这个App存在的就是LDAP AND注入，主要用来绕过访问控制。</p><p><code>将截到的包通过burp进行修改，修改数据提交的用户名字段，改为*)(objectClass%3d*即可绕过访问控制。</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;0x01&quot;&gt;&lt;a href=&quot;#0x01&quot; class=&quot;headerlink&quot; title=&quot;0x01&quot;&gt;&lt;/a&gt;0x01&lt;/h2&gt;&lt;p&gt;&lt;code&gt;在对客户的实际环境的测试中，有一套内部办公系统，需要对这套系统进行测试，这套系统主要为一个APP（安卓版），由于
-      
-    
-    </summary>
-    
-      <category term="渗透" scheme="http://airs-sec.com/categories/%E6%B8%97%E9%80%8F/"/>
-    
     
   </entry>
   
