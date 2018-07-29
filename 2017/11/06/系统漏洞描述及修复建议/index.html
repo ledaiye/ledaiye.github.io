@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="等我对自己很满意的时候，再预谋一场艳遇，岂不美哉。"><title>系统漏洞描述及修复建议 | 凉城Lc</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">系统漏洞描述及修复建议</h1><a id="logo" href="/.">凉城Lc</a><p class="description">真正的不自由，是在自己的心中设下牢笼</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/categories/漏洞描述"><i class="fa fa-star"> 漏洞描述</i></a><a href="/安全导航/"><i class="fa fa-share"> 安全导航</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">系统漏洞描述及修复建议</h1><div class="post-meta"><a href="/2017/11/06/系统漏洞描述及修复建议/#comments" class="comment-count"></a><p><span class="date">Nov 06, 2017</span><span><a href="/categories/漏洞描述/" class="category">漏洞描述</a></span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><p><img src="http://obgutsg63.bkt.clouddn.com/blog/1509936295475.jpg" alt="系统漏洞"></p>
+<h1 id="弱口令"><a href="#弱口令" class="headerlink" title="弱口令"></a>弱口令</h1><h2 id="telnet弱口令"><a href="#telnet弱口令" class="headerlink" title="telnet弱口令"></a>telnet弱口令</h2><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>开启了telnet服务，且telnet登陆存在弱口令，入侵者可远程telnet到该服务器上做相应的非法操作。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>关闭telnet服务</p>
+<h2 id="telnet不安全传输"><a href="#telnet不安全传输" class="headerlink" title="telnet不安全传输"></a>telnet不安全传输</h2><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>开启了telnet服务，telnet密码通过明文传输，如果攻击者监听，则可获取到密码。</p>
+<a id="more"></a>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>关闭telnet服务</p>
+<h2 id="ftp弱口令"><a href="#ftp弱口令" class="headerlink" title="ftp弱口令"></a>ftp弱口令</h2><blockquote>
+<p><strong>漏洞描述</strong></p>
+</blockquote>
+<p>存FTP匿名登录，攻击者可登录系统获取文件数据。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>建议设置复杂度较高的认证口令，或关闭不必要的服务。</p>
+<h2 id="SMB共享弱口令"><a href="#SMB共享弱口令" class="headerlink" title="SMB共享弱口令"></a>SMB共享弱口令</h2><blockquote>
+<p><strong>漏洞描述</strong></p>
+</blockquote>
+<p>入侵者可以通过与Windows主机建立一个SMB会话来获取目标主机的一些信息，例如目标主机的共享列表，管理用户名等等。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>可以限制匿名用户对Windows NT/2000/XP系统的LSA组件的访问，这可以避免匿名用户通过LSA获取系统的一些公开信息，例如共享列表信息。</p>
+<h2 id="SNMP共享团体名"><a href="#SNMP共享团体名" class="headerlink" title="SNMP共享团体名"></a>SNMP共享团体名</h2><blockquote>
+<p><strong>漏洞描述</strong></p>
+</blockquote>
+<p>开放的SNMP服务采用默认的字符串“public”作为口令。攻击者利用该漏洞可查看大量系统自身信息，为进一步的渗透提供辅助信息。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>若无管理必要，可关闭该服务，或者更改为private私有字符串。</p>
+<h2 id="ssh弱口令"><a href="#ssh弱口令" class="headerlink" title="ssh弱口令"></a>ssh弱口令</h2><blockquote>
+<p><strong>漏洞描述</strong></p>
+</blockquote>
+<p>该服务器开启了ssh服务，但是ssh存在弱密码，攻击者可通过弱密码登陆到该服务器上，上传响应的文件并执行相应的命令。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>建议更改默认口令。</p>
+<h2 id="远程桌面账户弱口令-3389"><a href="#远程桌面账户弱口令-3389" class="headerlink" title="远程桌面账户弱口令(3389)"></a>远程桌面账户弱口令(3389)</h2><blockquote>
+<p><strong>漏洞描述</strong></p>
+</blockquote>
+<p>开启了远程桌面服务，远程桌面服务允许用户进行远程连接到服务器，该默认账户存在弱口令。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>更改弱口令为更复杂的密码，如不需要，关闭远程桌面服务。</p>
+<h2 id="PHPMyAdmin空口令漏洞"><a href="#PHPMyAdmin空口令漏洞" class="headerlink" title="PHPMyAdmin空口令漏洞"></a>PHPMyAdmin空口令漏洞</h2><blockquote>
+<p><strong>漏洞描述</strong></p>
+</blockquote>
+<p>PHPMyAdmin没有设置口令，任何人都可以控制数据库。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>在PHPMyAdmin中为帐号加一个安全的口令。</p>
+<p>一个安全的口令应该包含以下四项中的三项： </p>
+<ul>
+<li>（1）大写字母 </li>
+<li>（2）小写字母 </li>
+<li>（3）特殊字符 </li>
+<li>（4）数字</li>
+</ul>
+<h2 id="Oracle数据库空口令漏洞"><a href="#Oracle数据库空口令漏洞" class="headerlink" title="Oracle数据库空口令漏洞"></a>Oracle数据库空口令漏洞</h2><blockquote>
+<p><strong>漏洞描述</strong></p>
+</blockquote>
+<p>Oracle服务器未设置管理帐号口令，导致可以远程不使用口令控制Oracle Server。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>为oracle数据库账号加一个安全的口令。</p>
+<p>一个安全的口令应该包含以下四项中的三项： </p>
+<ul>
+<li>（1）大写字母 </li>
+<li>（2）小写字母 </li>
+<li>（3）特殊字符 </li>
+<li>（4）数字</li>
+</ul>
+<h2 id="mysql数据库空口令漏洞"><a href="#mysql数据库空口令漏洞" class="headerlink" title="mysql数据库空口令漏洞"></a>mysql数据库空口令漏洞</h2><blockquote>
+<p><strong>漏洞描述</strong></p>
+</blockquote>
+<p>MySQL服务器未设置root帐号口令或者某个帐号使用了简单的口令，导致可以远程不使用口令连接或者很容易猜测到帐号口令。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>为mysql数据库账号加一个安全的口令。</p>
+<p>一个安全的口令应该包含以下四项中的三项： </p>
+<ul>
+<li>（1）大写字母 </li>
+<li>（2）小写字母 </li>
+<li>（3）特殊字符 </li>
+<li>（4）数字</li>
+</ul>
+<h1 id="ms-漏洞"><a href="#ms-漏洞" class="headerlink" title="ms**_**漏洞"></a><code>ms**_**漏洞</code></h1><h2 id="SMB-缓冲区溢出远程执行代码漏洞-ms09-001"><a href="#SMB-缓冲区溢出远程执行代码漏洞-ms09-001" class="headerlink" title="SMB 缓冲区溢出远程执行代码漏洞(ms09_001)"></a>SMB 缓冲区溢出远程执行代码漏洞(ms09_001)</h2><blockquote>
+<p><strong>漏洞描述</strong></p>
+</blockquote>
+<p>Microsoft 服务器消息块 (SMB) 协议软件处理特制 SMB 数据包的方式中存在一个未经身份验证的远程执行代码漏洞。 利用该漏洞的尝试不要求进行身份验证，从而使攻击者可以通过向运行 Server 服务的计算机发送特制网络消息来利用该漏洞。 成功利用此漏洞的攻击者可以完全控制系统。 利用此漏洞的大多数尝试会导致系统拒绝服务条件，但是远程执行代码在理论上是可行的。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>补丁更新地址：<a href="https://technet.microsoft.com/zh-cn/library/security/ms09-001.aspx" target="_blank" rel="noopener">https://technet.microsoft.com/zh-cn/library/security/ms09-001.aspx</a></p>
+<h1 id="http-sys远程命令执行漏洞-ms15-034"><a href="#http-sys远程命令执行漏洞-ms15-034" class="headerlink" title="http.sys远程命令执行漏洞(ms15_034)"></a>http.sys远程命令执行漏洞(ms15_034)</h1><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>远程执行代码漏洞存在于 HTTP 协议堆栈 (HTTP.sys) 中，当 HTTP.sys 未正确分析经特殊设计的 HTTP 请求时会导致此漏洞。 成功利用此漏洞的攻击者可以在系统帐户的上下文中执行任意代码。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>补丁更新地址：<a href="https://technet.microsoft.com/zh-cn/library/security/MS15-034" target="_blank" rel="noopener">https://technet.microsoft.com/zh-cn/library/security/MS15-034</a></p>
+<h2 id="远程桌面中的漏洞可能允许远程执行代码-ms12-020"><a href="#远程桌面中的漏洞可能允许远程执行代码-ms12-020" class="headerlink" title="远程桌面中的漏洞可能允许远程执行代码(ms12_020)"></a>远程桌面中的漏洞可能允许远程执行代码(ms12_020)</h2><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>远程桌面协议访问内存中未正确初始化或已被删除的对象的方式中存在一个远程执行代码漏洞。成功利用此漏洞的攻击者可以在目标系统上运行任意代码。攻击者可随后安装程序；(蓝屏)</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>补丁下载链接： <a href="https://technet.microsoft.com/zh-cn/library/security/ms12-020.aspx" target="_blank" rel="noopener">https://technet.microsoft.com/zh-cn/library/security/ms12-020.aspx</a></p>
+<h1 id="Apache-Tomcat版本信息泄露"><a href="#Apache-Tomcat版本信息泄露" class="headerlink" title="Apache Tomcat版本信息泄露"></a>Apache Tomcat版本信息泄露</h1><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>出于性能考虑，Tomcat在解析请求时通常会将获得的信息缓存于两个位置，即：内部的request对象和processor对象。这些对象不能同时回收。当发生某些错误需要被记录到Tomcat访问日志时，访问记录process将在requset对象被回收后触发该对象re-population。然而，在request对象用于下一个请求前它尚未回收。这就会导致先前请求的信息泄露（例如，远程IP地址、HTTP头等）。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>更新tomcat的版本，升级到高版本</p>
+<h1 id="Structs2类漏洞"><a href="#Structs2类漏洞" class="headerlink" title="Structs2类漏洞"></a>Structs2类漏洞</h1><h2 id="Structs2-devmode漏洞"><a href="#Structs2-devmode漏洞" class="headerlink" title="Structs2 devmode漏洞"></a>Structs2 devmode漏洞</h2><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>Apache Struts 2是世界上最流行的Java Web服务器框架之一。Apache Struts2在使用REST插件的情况下，攻击者使用REST调用恶意表达式可以远程执行代码。该漏洞编号为CVE-2016-4438，目前命名为S2-037。,黑客可以利用漏洞直接执行任意代码，绕过文件限制，上传文件，执行远程命令，控制服务器，直接盗取用户的所有资料，该漏洞广泛影响所有struts版本。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>关闭devMode:在struts.xml 设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;constant name=&quot;struts.devMode&quot; value=&quot;false&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>from:<a href="http://blog.csdn.net/qq_29277155/article/details/51959041" target="_blank" rel="noopener">http://blog.csdn.net/qq_29277155/article/details/51959041</a></p>
+<h2 id="Struts2-S2-016命令执行漏洞-S2-016"><a href="#Struts2-S2-016命令执行漏洞-S2-016" class="headerlink" title="Struts2 S2-016命令执行漏洞(S2-016)"></a>Struts2 S2-016命令执行漏洞(S2-016)</h2><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>此漏洞影响struts2.0-struts2.3的所有版本，可直接导致服务器被远程控制从而引起数据泄漏,影响巨大</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>参考：<br><a href="http://www.cnblogs.com/lianliang/p/5457686.html" target="_blank" rel="noopener">http://www.cnblogs.com/lianliang/p/5457686.html</a><br><a href="http://www.freebuf.com/vuls/11220.html" target="_blank" rel="noopener">http://www.freebuf.com/vuls/11220.html</a></p>
+<h2 id="Struts2-S2-019命令执行漏洞-S2-019"><a href="#Struts2-S2-019命令执行漏洞-S2-019" class="headerlink" title="Struts2 S2-019命令执行漏洞(S2-019)"></a>Struts2 S2-019命令执行漏洞(S2-019)</h2><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>公告：<a href="http://struts.apache.org/docs/s2-019.html" target="_blank" rel="noopener">http://struts.apache.org/docs/s2-019.html</a></p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>1、升级structs 2到2.3.15.3版本<br>2、如果漏洞还存在<br>关 debug模式，请关一下，Apache Struts 2的Dynamic Method Invocation，也关一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;constant name=&quot;struts.devMode&quot; value=&quot;false&quot; /&gt; </span><br><span class="line">&lt;constant name=&quot;struts.enable.DynamicMethodInvocation&quot; value=&quot;false&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>参考：<br><a href="http://blog.csdn.net/zhaozhanyong/article/details/50510100" target="_blank" rel="noopener">http://blog.csdn.net/zhaozhanyong/article/details/50510100</a><br><a href="https://github.com/Medicean/VulApps/tree/master/s/struts2/s2-019" target="_blank" rel="noopener">https://github.com/Medicean/VulApps/tree/master/s/struts2/s2-019</a></p>
+<h2 id="Struts2-S2-032命令执行漏洞-S2-032"><a href="#Struts2-S2-032命令执行漏洞-S2-032" class="headerlink" title="Struts2 S2-032命令执行漏洞(S2-032)"></a>Struts2 S2-032命令执行漏洞(S2-032)</h2><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>公告：<a href="http://struts.apache.org/docs/s2-032.html" target="_blank" rel="noopener">http://struts.apache.org/docs/s2-032.html</a></p>
+<p>该漏洞的成因是用户开启动态方法调用（Dynamic Method Invocation）的情况下，攻击者能够使用method:前缀执行远程代码。</p>
+<p>该漏洞的成因是用户开启动态方法调用（Dynamic Method Invocation）的情况下，攻击者能够使用method:前缀执行远程代码。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>Struts官方给出的解决方案是禁用动态方法调用功能，或者升级到Struts 2.3.20.2，2.3.24.2或2.3.28.1。</p>
+<p>修改Struts2的配置文件如下：将“struts.enable.DynamicMethodInvocation”的值设置为false，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt; constant name=&quot;struts.enable.DynamicMethodInvocation&quot; value=&quot;false&quot; / &gt;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2.3.28.1版本Struts下载地址：<br><a href="https://struts.apache.org/download.cgi#struts23281。" target="_blank" rel="noopener">https://struts.apache.org/download.cgi#struts23281。</a></p>
+</blockquote>
+<blockquote>
+<p>参考：<br><a href="http://blog.csdn.net/langkew/article/details/51538415" target="_blank" rel="noopener">http://blog.csdn.net/langkew/article/details/51538415</a><br><a href="https://github.com/Medicean/VulApps/blob/master/s/struts2/s2-032/" target="_blank" rel="noopener">https://github.com/Medicean/VulApps/blob/master/s/struts2/s2-032/</a></p>
+</blockquote>
+<h2 id="Struts2-S2-037命令执行漏洞-S2-037"><a href="#Struts2-S2-037命令执行漏洞-S2-037" class="headerlink" title="Struts2 S2-037命令执行漏洞(S2-037)"></a>Struts2 S2-037命令执行漏洞(S2-037)</h2><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-037" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-037</a></p>
+<p>使用REST插件时，可能会传递一个恶意的表达式，用于在服务器端执行任意代码。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>更新到Apache Struts version 2.3.29版本</p>
+<h2 id="Struts2-Jakarta-Plugin插件远程代码执行漏洞-S2-045"><a href="#Struts2-Jakarta-Plugin插件远程代码执行漏洞-S2-045" class="headerlink" title="Struts2_Jakarta_Plugin插件远程代码执行漏洞(S2-045)"></a>Struts2_Jakarta_Plugin插件远程代码执行漏洞(S2-045)</h2><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>Struts使用的Jakarta解析文件上传请求包不当，当远程攻击者构造恶意的Content-Type，可能导致远程命令执行。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>受影响用户可升级版本至Apache Struts 2.3.32 或 Apache Struts 2.5.10.1以消除漏洞影响。</p>
+<blockquote>
+<p>Struts 2.3.32<br>下载地址：<a href="https://dist.apache.org/repos/dist/dev/struts/" target="_blank" rel="noopener">https://dist.apache.org/repos/dist/dev/struts/</a></p>
+</blockquote>
+<blockquote>
+<p>Struts 2.5.10.1<br>下载地址：<a href="https://dist.apache.org/repos/dist/dev/struts/" target="_blank" rel="noopener">https://dist.apache.org/repos/dist/dev/struts/</a></p>
+</blockquote>
+<blockquote>
+<p>相关漏洞和修复方法说明地址：<br><a href="https://cwiki.apache.org/confluence/display/WW/S2-045" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-045</a> <a href="https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.32" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.32</a> </p>
+</blockquote>
+<blockquote>
+<p>临时解决办法<br>如用户不方便升级，可采取如下临时解决方案：删除commons-fileupload-x.x.x.jar文件（会造成上传功能不可用）。</p>
+</blockquote>
+<h2 id="Struts2-Jakarta-Plugin插件远程代码执行漏洞-S2-046"><a href="#Struts2-Jakarta-Plugin插件远程代码执行漏洞-S2-046" class="headerlink" title="Struts2_Jakarta_Plugin插件远程代码执行漏洞(S2-046)"></a>Struts2_Jakarta_Plugin插件远程代码执行漏洞(S2-046)</h2><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>漏洞公告：<a href="https://cwiki.apache.org/confluence/display/WW/S2-046" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/S2-046</a></p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<blockquote>
+<p>升级版本： 请升级至Struts2安全版本<br>Struts 2.3.32：<a href="https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.32" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.32</a><br>Struts 2.5.10.1：<a href="https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.5.10.1" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.5.10.1</a> </p>
+</blockquote>
+<h1 id="使用了脆弱的Javascript库"><a href="#使用了脆弱的Javascript库" class="headerlink" title="使用了脆弱的Javascript库"></a>使用了脆弱的Javascript库</h1><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>JavaScript作为一种相当简单但功能强大的客户端脚本语言，本质是一种解释型语言。其源代码可以轻松被任何人获取到。开发者将各式敏感信息存储在JavaScript脚本中，由于JS的特性，攻击者可以对这些信息一览无余，从而导致对WEB服务和用户隐私造成不同程度的威胁。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<p>升级到高版本的Javascript 库。</p>
+<h1 id="SSL-v3-PODDLE-CVE-2014-3566"><a href="#SSL-v3-PODDLE-CVE-2014-3566" class="headerlink" title="SSL v3 PODDLE(CVE-2014-3566)"></a>SSL v3 PODDLE(CVE-2014-3566)</h1><blockquote>
+<p><strong>漏洞描述：</strong></p>
+</blockquote>
+<p>由Google发现的POODLE漏洞(Padding Oracle On Downloaded Legacy Encryption vulnerability)，可被攻击者用来窃取采用SSL3.0版加密通信过程中的内容，又被称为“贵宾犬攻击”。</p>
+<blockquote>
+<p><strong>解决建议</strong></p>
+</blockquote>
+<blockquote>
+<p>参考：<br><a href="https://access.redhat.com/articles/1232123" target="_blank" rel="noopener">https://access.redhat.com/articles/1232123</a><br><a href="http://www.linuxidc.com/Linux/2014-10/108103.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2014-10/108103.htm</a></p>
+</blockquote>
+<font color="red" font-size="16px">注：上述内容均来自互联网</font>
+
+</div><div class="tags"><a href="/tags/系统漏洞/">系统漏洞</a></div><div class="post-share"><div class="bdsharebuttonbox"><span style="float:left;line-height: 28px;height: 28px;font-size:16px;font-weight:blod">分享到：</span><a href="#" data-cmd="more" class="bds_more"></a><a href="#" data-cmd="mshare" title="分享到一键分享" class="bds_mshare"></a><a href="#" data-cmd="fbook" title="分享到Facebook" class="bds_fbook"></a><a href="#" data-cmd="twi" title="分享到Twitter" class="bds_twi"></a><a href="#" data-cmd="linkedin" title="分享到linkedin" class="bds_linkedin"></a><a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a><a href="#" data-cmd="evernotecn" title="分享到印象笔记" class="bds_evernotecn"></a><a href="#" data-cmd="weixin" title="分享到微信" class="bds_weixin"></a><a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a><a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a></div></div><div class="post-nav"><a href="/2017/12/13/web安全深度剖析-第五章-sql注入漏洞/" class="pre">web安全深度剖析-第五章-sql注入漏洞</a><a href="/2017/10/09/linux周期性进程（任务计划）/" class="next">linux周期性进程（任务计划）</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#弱口令"><span class="toc-text">弱口令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#telnet弱口令"><span class="toc-text">telnet弱口令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#telnet不安全传输"><span class="toc-text">telnet不安全传输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ftp弱口令"><span class="toc-text">ftp弱口令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB共享弱口令"><span class="toc-text">SMB共享弱口令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SNMP共享团体名"><span class="toc-text">SNMP共享团体名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh弱口令"><span class="toc-text">ssh弱口令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程桌面账户弱口令-3389"><span class="toc-text">远程桌面账户弱口令(3389)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHPMyAdmin空口令漏洞"><span class="toc-text">PHPMyAdmin空口令漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Oracle数据库空口令漏洞"><span class="toc-text">Oracle数据库空口令漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql数据库空口令漏洞"><span class="toc-text">mysql数据库空口令漏洞</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ms-漏洞"><span class="toc-text">ms**_**漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB-缓冲区溢出远程执行代码漏洞-ms09-001"><span class="toc-text">SMB 缓冲区溢出远程执行代码漏洞(ms09_001)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http-sys远程命令执行漏洞-ms15-034"><span class="toc-text">http.sys远程命令执行漏洞(ms15_034)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#远程桌面中的漏洞可能允许远程执行代码-ms12-020"><span class="toc-text">远程桌面中的漏洞可能允许远程执行代码(ms12_020)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Apache-Tomcat版本信息泄露"><span class="toc-text">Apache Tomcat版本信息泄露</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Structs2类漏洞"><span class="toc-text">Structs2类漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Structs2-devmode漏洞"><span class="toc-text">Structs2 devmode漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Struts2-S2-016命令执行漏洞-S2-016"><span class="toc-text">Struts2 S2-016命令执行漏洞(S2-016)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Struts2-S2-019命令执行漏洞-S2-019"><span class="toc-text">Struts2 S2-019命令执行漏洞(S2-019)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Struts2-S2-032命令执行漏洞-S2-032"><span class="toc-text">Struts2 S2-032命令执行漏洞(S2-032)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Struts2-S2-037命令执行漏洞-S2-037"><span class="toc-text">Struts2 S2-037命令执行漏洞(S2-037)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Struts2-Jakarta-Plugin插件远程代码执行漏洞-S2-045"><span class="toc-text">Struts2_Jakarta_Plugin插件远程代码执行漏洞(S2-045)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Struts2-Jakarta-Plugin插件远程代码执行漏洞-S2-046"><span class="toc-text">Struts2_Jakarta_Plugin插件远程代码执行漏洞(S2-046)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用了脆弱的Javascript库"><span class="toc-text">使用了脆弱的Javascript库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSL-v3-PODDLE-CVE-2014-3566"><span class="toc-text">SSL v3 PODDLE(CVE-2014-3566)</span></a></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/18/logcat命令行工具/">logcat命令行工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/17/如何寻找真实ip/">如何寻找真实ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/16/linux安装metasploit/">linux安装metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/15/Mobile-Security-Framework-MobSF/">Mobile-Security-Framework-MobSF</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/14/linux就该这么学-3/">linux就该这么学-3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/13/linux就该这么学-2/">linux就该这么学-2</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/12/linux就该这么学-1/">linux就该这么学-1</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/10/突然间失落/">突然间失落</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/09/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/黑客与画家-三-不能说的话/">黑客与画家-三-不能说的话</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍分享/">书籍分享</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习/">学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透/">渗透</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/漏洞描述/">漏洞描述</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/阅读/">阅读</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/web信息收集/" style="font-size: 15px;">web信息收集</a> <a href="/tags/burp-suite/" style="font-size: 15px;">burp suite</a> <a href="/tags/crond-crondtab/" style="font-size: 15px;">crond,crondtab</a> <a href="/tags/nmap/" style="font-size: 15px;">nmap</a> <a href="/tags/sqlmap/" style="font-size: 15px;">sqlmap</a> <a href="/tags/渗透/" style="font-size: 15px;">渗透</a> <a href="/tags/web后门/" style="font-size: 15px;">web后门</a> <a href="/tags/crondtab/" style="font-size: 15px;">crondtab</a> <a href="/tags/书籍/" style="font-size: 15px;">书籍</a> <a href="/tags/web安全/" style="font-size: 15px;">web安全</a> <a href="/tags/漏洞描述-解决建议/" style="font-size: 15px;">漏洞描述 解决建议</a> <a href="/tags/移动应用/" style="font-size: 15px;">移动应用</a> <a href="/tags/系统漏洞/" style="font-size: 15px;">系统漏洞</a> <a href="/tags/勒索软件/" style="font-size: 15px;">勒索软件</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="http://www.ggsec.cn/" title="ggsec" target="_blank">ggsec</a><ul></ul><a href="http://www.secice.cn/" title="iceH_Blog" target="_blank">iceH_Blog</a><ul></ul><a href="http://www.errorsec.top/" title="errorsec" target="_blank">errorsec</a><ul></ul><a href="http://www.doubleyi.xin/" title="DOUBLE翊" target="_blank">DOUBLE翊</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Site Haritası</a> |  <a href="/atom.xml">订阅</a> |  <a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">凉城Lc.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.1" async></script><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","qzone","linkedin","fbook","twi","print","renren","sqq","evernotecn","bdysc","tqq","tqf","bdxc","kaixin001","tieba","douban","bdhome","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","h163","copy"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||head).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script></body></html>

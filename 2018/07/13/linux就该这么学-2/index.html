@@ -1,0 +1,344 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="等我对自己很满意的时候，再预谋一场艳遇，岂不美哉。"><title>linux就该这么学-2 | 凉城Lc</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">linux就该这么学-2</h1><a id="logo" href="/.">凉城Lc</a><p class="description">真正的不自由，是在自己的心中设下牢笼</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/categories/漏洞描述"><i class="fa fa-star"> 漏洞描述</i></a><a href="/安全导航/"><i class="fa fa-share"> 安全导航</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">linux就该这么学-2</h1><div class="post-meta"><a href="/2018/07/13/linux就该这么学-2/#comments" class="comment-count"></a><p><span class="date">Jul 13, 2018</span><span><a href="/categories/阅读/" class="category">阅读</a></span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><blockquote>
+<p>用户不能直接操作底层，通过shell可以达到控制底层。应用程序处于最上层，和用户最近的一层，应用程序和内核之间的就是系统调用接口（shell）。</p>
+</blockquote>
+<p><img src="http://obgutsg63.bkt.clouddn.com/blog/36142.jpg" alt="linux就该这么学" title="inux就该这么学"></p>
+<a id="more"></a>
+<p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531492677698.jpg" alt="linux shell"></p>
+<blockquote>
+<p>计算机用户可以通过shell或者应用程序本身将摄入传送给linux内核，达到控制linux内核，从而驱动系统硬件进行数据处理，系统硬件将处理结果输出给用户。应用程序在功能设计上，本质上是shell的图形化，有些功能操作并没有直接操作shell来的快，所以，为什么说，有些人喜欢用命令行，而抛弃图形化界面。</p>
+</blockquote>
+<blockquote>
+<p>现在用的最多的就是bash了，很多linux系统默认就是bash shell。</p>
+</blockquote>
+<blockquote>
+<p>通过shell就命令传送给linux内核执行，下面开始列出些linux常用的命令。</p>
+</blockquote>
+<h1 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h1><h2 id="1、echo"><a href="#1、echo" class="headerlink" title="1、echo"></a>1、echo</h2><p>在屏幕上打印字符或变量</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@Lc</span> ~]<span class="meta"># echo <span class="string">'hello,world'</span></span></span><br><span class="line">hello,world</span><br></pre></td></tr></table></figure>
+<h2 id="2、date"><a href="#2、date" class="headerlink" title="2、date"></a>2、date</h2><p><strong>date [参数] [选项]</strong></p>
+<ul>
+<li>-d <string>：显示字符串所指的日期和时间</string></li>
+<li>-s <string>：根据指定字符串设置日期和时间</string></li>
+</ul>
+<blockquote>
+<p> 字符串用双引号括起来</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# date</span><br><span class="line">2018年 04月 05日 星期四 00:28:57 CST</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# date +%Y-%m-%d-%X</span><br><span class="line">2018-04-05-00时30分52秒</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# date -d "1 day ago" +"%Y-%m-%d"</span><br><span class="line">2018-04-03</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">date设置时间</span></span><br><span class="line"></span><br><span class="line">[root@Lc ~]# date -s "20180404 16:32"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash">H 小时，24小时制（00~23）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">I 小时，12小时制（01~12）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">k 小时，24小时制（0~23）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">l 小时，12小时制（1~12）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">M 分钟（00~59）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">p 显示出AM或PM</span></span><br><span class="line"><span class="meta">%</span><span class="bash">r 显示时间，12小时制（hh:mm:ss %p）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">s 从1970年1月1日00:00:00到目前经历的秒数</span></span><br><span class="line"><span class="meta">%</span><span class="bash">S 显示秒（00~59）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">T 显示时间，24小时制（hh:mm:ss）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">X 显示时间的格式（%H:%M:%S）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">Z 显示时区，日期域（CST）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">a 星期的简称（Sun~Sat）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">A 星期的全称（Sunday~Saturday）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">h,%b 月的简称（Jan~Dec）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">B 月的全称（January~December）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">c 日期和时间（Tue Nov 20 14:12:58 2012）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">d 一个月的第几天（01~31）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">x,%D 日期（mm/dd/yy）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">j 一年的第几天（001~366）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">m 月份（01~12）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">w 一个星期的第几天（0代表星期天）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">W 一年的第几个星期（00~53，星期一为第一天）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">y 年的最后两个数字（1999则是99）</span></span><br></pre></td></tr></table></figure>
+<p><strong>时间同步</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# date -s &quot;20180405 14:02:20&quot;</span><br><span class="line">2018年 04月 05日 星期四 14:02:20 CST</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# clock -w</span><br><span class="line">[root@Lc ~]# date</span><br><span class="line">2018年 04月 05日 星期四 14:02:26 CST</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# hwclock</span><br><span class="line">2018年04月05日 星期四 14时02分31秒  -0.063613 seconds</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# clock</span><br><span class="line">2018年04月05日 星期四 14时02分34秒  -0.562994 seconds</span><br></pre></td></tr></table></figure>
+<p>一个是OS系统时间,一个是BIOS时间，用hwclock –systohc or -hctosys 用这个指令可以同步两者的时间</p>
+<h2 id="3、reboot"><a href="#3、reboot" class="headerlink" title="3、reboot"></a>3、reboot</h2><blockquote>
+<p>用于重启系统</p>
+</blockquote>
+<h2 id="4、wget"><a href="#4、wget" class="headerlink" title="4、wget"></a>4、wget</h2><blockquote>
+<p>用于从网络上下载文件</p>
+</blockquote>
+<p>wget [参数] [url链接]</p>
+<h2 id="5、elinks"><a href="#5、elinks" class="headerlink" title="5、elinks"></a>5、elinks</h2><blockquote>
+<p>纯文本浏览器</p>
+</blockquote>
+<h2 id="6、shutdown"><a href="#6、shutdown" class="headerlink" title="6、shutdown"></a>6、shutdown</h2><blockquote>
+<p>关机</p>
+</blockquote>
+<h1 id="系统状态检测命令"><a href="#系统状态检测命令" class="headerlink" title="系统状态检测命令"></a>系统状态检测命令</h1><h2 id="1、ifconfig"><a href="#1、ifconfig" class="headerlink" title="1、ifconfig"></a>1、ifconfig</h2><blockquote>
+<p>获取网卡配置或网络状态</p>
+</blockquote>
+<blockquote>
+<p>通过ifconfig配置的网卡信息，当前环境生效，重启后失效。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth[x] xxx.xxx.xxx.xxx/xx</span><br></pre></td></tr></table></figure>
+<h2 id="2、uname"><a href="#2、uname" class="headerlink" title="2、uname"></a>2、uname</h2><blockquote>
+<p>查看系统内核版本</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# uname -a</span><br><span class="line">Linux Lc 2.6.32-431.el6.x86_64 #1 SMP Fri Nov 22 03:15:09 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# uname -r</span><br><span class="line">2.6.32-431.el6.x86_64</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# cat /etc/redhat-release</span><br><span class="line">CentOS release 6.5 (Final)</span><br></pre></td></tr></table></figure>
+<h2 id="3、uptime"><a href="#3、uptime" class="headerlink" title="3、uptime"></a>3、uptime</h2><blockquote>
+<p>用于查看系统负载情况</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# uptime</span><br><span class="line">16:41:30 up 18 min,  2 users,  load average: 0.00, 0.00, 0.00</span><br><span class="line">系统当前时间    系统已经运行时间  当前在线用户   系统1分钟、5分钟和15分钟内平均负载情况 （负载小于1为正常）</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>系统平均负载是指在特定时间间隔内运行队列中的平均进程数。</p>
+</li>
+<li><p>如果每个CPU内核的当前活动进程数不大于3的话，那么系统的性能是良好的。如果每个CPU内核的任务数大于5，那么这台机器的性能有严重问题。</p>
+</li>
+<li><p>如果你的linux主机是1个双核CPU的话，当Load Average 为6的时候说明机器已经被充分使用了。</p>
+</li>
+</ul>
+<p>每秒钟刷新查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">witch -n 1 uptime</span><br></pre></td></tr></table></figure>
+<h2 id="4、free"><a href="#4、free" class="headerlink" title="4、free"></a>4、free</h2><blockquote>
+<p>用于查看当前系统内存使用情况</p>
+</blockquote>
+<p>free -m : 以MB为单位显示内存使用情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          1861        268       1593          0         16        136</span><br><span class="line">-/+ buffers/cache:        114       1747</span><br><span class="line">Swap:         3999          0       3999</span><br></pre></td></tr></table></figure>
+<ul>
+<li>total：内存总数</li>
+<li>userd：当前已使用的内存数</li>
+<li>free：空闲的内存数</li>
+<li>shared：当前已经废弃不用</li>
+<li>buffers：缓存内存数</li>
+<li><p>cached：缓存内存数</p>
+</li>
+<li><p>内存 = used + free</p>
+</li>
+</ul>
+<blockquote>
+<p>(-buffers/cache) used内存数：Mem行中的 used – buffers – cached<br>(+buffers/cache) free内存数: Mem行中的 free + buffers + cached</p>
+</blockquote>
+<p>可见-buffers/cache反映的是被程序实实在在吃掉的内存，而+buffers/cache反映的是可以挪用的内存总数。</p>
+<ul>
+<li>swap:是指交换分区</li>
+</ul>
+<h2 id="5、who"><a href="#5、who" class="headerlink" title="5、who"></a>5、who</h2><blockquote>
+<p>用于查看当前登录主机的用户情况</p>
+</blockquote>
+<h2 id="6、last"><a href="#6、last" class="headerlink" title="6、last"></a>6、last</h2><blockquote>
+<p>用于查看所有系统的登录记录</p>
+</blockquote>
+<h2 id="7、history"><a href="#7、history" class="headerlink" title="7、history"></a>7、history</h2><blockquote>
+<p>查看命令执行历史</p>
+</blockquote>
+<p>.bash_history</p>
+<p>history -c</p>
+<p>/etc/profile - HISSIZE</p>
+<h1 id="工作目录切换命令"><a href="#工作目录切换命令" class="headerlink" title="工作目录切换命令"></a>工作目录切换命令</h1><h2 id="1、pwd"><a href="#1、pwd" class="headerlink" title="1、pwd"></a>1、pwd</h2><blockquote>
+<p>显示当前所在的工作目录</p>
+</blockquote>
+<h2 id="2、cd"><a href="#2、cd" class="headerlink" title="2、cd"></a>2、cd</h2><blockquote>
+<p>工作目录切换</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-</td>
+<td>切换到上一次的目录，如“cd-”</td>
+</tr>
+<tr>
+<td>~</td>
+<td>切换到家目录，如“cd ~”</td>
+</tr>
+<tr>
+<td>~username</td>
+<td>切换到其他用户的家目录</td>
+</tr>
+<tr>
+<td>..</td>
+<td>切换到上级目录，“cd ..”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3、ls"><a href="#3、ls" class="headerlink" title="3、ls"></a>3、ls</h2><blockquote>
+<p>查看目录下的文件</p>
+</blockquote>
+<h1 id="文本编辑命令"><a href="#文本编辑命令" class="headerlink" title="文本编辑命令"></a>文本编辑命令</h1><h2 id="1、cat"><a href="#1、cat" class="headerlink" title="1、cat"></a>1、cat</h2><blockquote>
+<p>查看纯文本文件</p>
+</blockquote>
+<p>-n/-b：显示行号</p>
+<h2 id="2、more"><a href="#2、more" class="headerlink" title="2、more"></a>2、more</h2><blockquote>
+<p>查看纯文本文件</p>
+</blockquote>
+<h2 id="3、head"><a href="#3、head" class="headerlink" title="3、head"></a>3、head</h2><blockquote>
+<p>查看文本文件的前N行，</p>
+</blockquote>
+<p>默认显示前10行，-n：指定显示的行数</p>
+<h2 id="4、tail"><a href="#4、tail" class="headerlink" title="4、tail"></a>4、tail</h2><blockquote>
+<p>查看文本文件的后N行</p>
+</blockquote>
+<h2 id="5、od"><a href="#5、od" class="headerlink" title="5、od"></a>5、od</h2><blockquote>
+<p>用于查看特殊格式的文件</p>
+</blockquote>
+<p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531493367917.jpg" alt="od"></p>
+<h2 id="6、tr"><a href="#6、tr" class="headerlink" title="6、tr"></a>6、tr</h2><blockquote>
+<p>用于转换文本文件中的字符</p>
+</blockquote>
+<p>先查看文本内容，后通过管道符将输出的文本给tr进行文本转换。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# cat test.txt</span><br><span class="line">www.airs-sec.com</span><br><span class="line">linux</span><br><span class="line">[root@Lc ~]# cat test.txt | tr [a-z] [A-Z]</span><br><span class="line">WWW.AIRS-SEC.COM</span><br><span class="line">LINUX</span><br></pre></td></tr></table></figure>
+<h2 id="7、wc"><a href="#7、wc" class="headerlink" title="7、wc"></a>7、wc</h2><blockquote>
+<p>用于统计指定文本的行数、字数、字节数，</p>
+</blockquote>
+<p>wc [参数] 文本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# cat /etc/passwd | wc -l</span><br><span class="line">20</span><br></pre></td></tr></table></figure>
+<h2 id="8、cut"><a href="#8、cut" class="headerlink" title="8、cut"></a>8、cut</h2><blockquote>
+<p>用于通过列来提取文本字符，格式为：cut [参数] 文本</p>
+</blockquote>
+<ul>
+<li>-d:指定分隔符</li>
+<li>-f:指定显示的列数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# cat /etc/passwd | cut -d &quot;:&quot; -f1</span><br><span class="line">root</span><br><span class="line">bin</span><br><span class="line">daemon</span><br><span class="line">adm</span><br><span class="line">lp</span><br><span class="line">sync</span><br><span class="line">shutdown</span><br><span class="line">halt</span><br><span class="line">mail</span><br><span class="line">uucp</span><br><span class="line">operator</span><br><span class="line">games</span><br><span class="line">gopher</span><br><span class="line">ftp</span><br><span class="line">nobody</span><br><span class="line">dbus</span><br><span class="line">vcsa</span><br><span class="line">saslauth</span><br><span class="line">postfix</span><br><span class="line">sshd</span><br></pre></td></tr></table></figure>
+<h2 id="9、diff"><a href="#9、diff" class="headerlink" title="9、diff"></a>9、diff</h2><blockquote>
+<p>比较两个文本文件的内容差异</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# diff test.txt test1.txt</span><br><span class="line">1c1</span><br><span class="line">&lt; www.airs-sec.com</span><br><span class="line">---</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> http://www.airs-sec.com</span></span><br><span class="line">2a3</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> windows</span></span><br><span class="line"></span><br><span class="line">[root@Lc ~]# diff --brief test.txt test1.txt</span><br><span class="line">Files test.txt and test1.txt differ</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# diff -c test.txt test1.txt</span><br><span class="line">*** test.txt    2018-04-05 15:12:08.356992993 +0800</span><br><span class="line">--- test1.txt   2018-04-05 15:22:40.555994033 +0800</span><br><span class="line">***************</span><br><span class="line">*** 1,2 ****</span><br><span class="line">! www.airs-sec.com</span><br><span class="line">  linux</span><br><span class="line">--- 1,3 ----</span><br><span class="line">! http://www.airs-sec.com</span><br><span class="line">  linux</span><br><span class="line">+ windows</span><br></pre></td></tr></table></figure>
+<h1 id="文件目录管理命令"><a href="#文件目录管理命令" class="headerlink" title="文件目录管理命令"></a>文件目录管理命令</h1><h2 id="1、touch"><a href="#1、touch" class="headerlink" title="1、touch"></a>1、touch</h2><blockquote>
+<p>创建空白时间与修改文件时间</p>
+</blockquote>
+<p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531493500385.jpg" alt="touch"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# ll</span><br><span class="line">总用量 32</span><br><span class="line">-rw-r--r--. 1 root root     0 4月   5 15:41 1.txt</span><br><span class="line">-rw-------. 1 root root  1206 1月  30 19:45 anaconda-ks.cfg</span><br><span class="line">-rw-r--r--. 1 root root 13231 1月  30 19:45 install.log</span><br><span class="line">-rw-r--r--. 1 root root  3482 1月  30 19:44 install.log.syslog</span><br><span class="line">-rw-r--r--. 1 root root    38 4月   5 15:22 test1.txt</span><br><span class="line">-rw-r--r--. 1 root root    23 4月   5 15:12 test.txt</span><br><span class="line">[root@Lc ~]# touch -d &quot;2 day ago&quot; 1.txt</span><br><span class="line">[root@Lc ~]# ll</span><br><span class="line">总用量 32</span><br><span class="line">-rw-r--r--. 1 root root     0 4月   3 18:03 1.txt</span><br><span class="line">-rw-------. 1 root root  1206 1月  30 19:45 anaconda-ks.cfg</span><br><span class="line">-rw-r--r--. 1 root root 13231 1月  30 19:45 install.log</span><br><span class="line">-rw-r--r--. 1 root root  3482 1月  30 19:44 install.log.syslog</span><br><span class="line">-rw-r--r--. 1 root root    38 4月   5 15:22 test1.txt</span><br><span class="line">-rw-r--r--. 1 root root    23 4月   5 15:12 test.txt</span><br></pre></td></tr></table></figure>
+<h2 id="2、mkdir"><a href="#2、mkdir" class="headerlink" title="2、mkdir"></a>2、mkdir</h2><blockquote>
+<p>创建目录</p>
+</blockquote>
+<ul>
+<li>-m=MODE 指定目录的权限</li>
+<li>-p：创建多层目录</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# mkdir dir</span><br><span class="line">[root@Lc ~]# ll</span><br><span class="line">总用量 36</span><br><span class="line">-rw-r--r--. 1 root root     0 4月   3 18:03 1.txt</span><br><span class="line">-rw-------. 1 root root  1206 1月  30 19:45 anaconda-ks.cfg</span><br><span class="line">drwxr-xr-x. 2 root root  4096 4月   5 18:15 dir</span><br><span class="line">-rw-r--r--. 1 root root 13231 1月  30 19:45 install.log</span><br><span class="line">-rw-r--r--. 1 root root  3482 1月  30 19:44 install.log.syslog</span><br><span class="line">-rw-r--r--. 1 root root    38 4月   5 15:22 test1.txt</span><br><span class="line">-rw-r--r--. 1 root root    23 4月   5 15:12 test.txt</span><br><span class="line">[root@Lc ~]# mkdir -m 777 dir1</span><br><span class="line">[root@Lc ~]# ll</span><br><span class="line">总用量 40</span><br><span class="line">-rw-r--r--. 1 root root     0 4月   3 18:03 1.txt</span><br><span class="line">-rw-------. 1 root root  1206 1月  30 19:45 anaconda-ks.cfg</span><br><span class="line">drwxr-xr-x. 2 root root  4096 4月   5 18:15 dir</span><br><span class="line">drwxrwxrwx. 2 root root  4096 4月   5 18:15 dir1</span><br><span class="line">-rw-r--r--. 1 root root 13231 1月  30 19:45 install.log</span><br><span class="line">-rw-r--r--. 1 root root  3482 1月  30 19:44 install.log.syslog</span><br><span class="line">-rw-r--r--. 1 root root    38 4月   5 15:22 test1.txt</span><br><span class="line">-rw-r--r--. 1 root root    23 4月   5 15:12 test.txt</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# mkdir -p dir3/&#123;test1,test2&#125;</span><br><span class="line">[root@Lc ~]# ll dir3</span><br><span class="line">总用量 8</span><br><span class="line">drwxr-xr-x. 2 root root 4096 4月   5 18:16 test1</span><br><span class="line">drwxr-xr-x. 2 root root 4096 4月   5 18:16 test2</span><br></pre></td></tr></table></figure>
+<h2 id="3、cp"><a href="#3、cp" class="headerlink" title="3、cp"></a>3、cp</h2><blockquote>
+<p>复制文件或目录</p>
+</blockquote>
+<p><strong>cp [参数] 源文件 目标文件</strong></p>
+<ul>
+<li>-p：保留原始文件的属性</li>
+<li>-r：递归复制</li>
+</ul>
+<h2 id="4、mv"><a href="#4、mv" class="headerlink" title="4、mv"></a>4、mv</h2><blockquote>
+<p>移动文件或重命名</p>
+</blockquote>
+<h2 id="5、rm"><a href="#5、rm" class="headerlink" title="5、rm"></a>5、rm</h2><blockquote>
+<p>删除文件或目录</p>
+</blockquote>
+<ul>
+<li>-r：忽略警告</li>
+<li>-f：删除目录</li>
+</ul>
+<h2 id="6、dd"><a href="#6、dd" class="headerlink" title="6、dd"></a>6、dd</h2><blockquote>
+<p>用于复制文件并对原文件的内容进行转换和格式化处理。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>if</td>
+<td>输入文件的名称</td>
+</tr>
+<tr>
+<td>of</td>
+<td>输出文件的名称</td>
+</tr>
+<tr>
+<td>bs</td>
+<td>设置每个“块”的大小</td>
+</tr>
+<tr>
+<td>count</td>
+<td>设置要拷贝“块”的个数</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>案例：</p>
+</blockquote>
+<p>生成一个100M的空白文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# dd if=/dev/zero of=test_dd bs=100M count=1</span><br><span class="line">记录了1+0 的读入</span><br><span class="line">记录了1+0 的写出</span><br><span class="line">104857600字节(105 MB)已复制，1.38478 秒，75.7 MB/秒</span><br><span class="line">[root@Lc ~]# ll test_dd</span><br><span class="line">-rw-r--r--. 1 root root 104857600 4月   6 01:38 test_dd</span><br><span class="line">[root@Lc ~]# ll -h test_dd</span><br><span class="line">-rw-r--r--. 1 root root 100M 4月   6 01:38 test_dd</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong></p>
+<p>/dev/zero 是一个字符设备，会不断返回0值字节（\0）。</p>
+<h1 id="用户与组管理命令"><a href="#用户与组管理命令" class="headerlink" title="用户与组管理命令"></a>用户与组管理命令</h1><h2 id="1、useradd"><a href="#1、useradd" class="headerlink" title="1、useradd"></a>1、useradd</h2><blockquote>
+<p>用于创建新用户</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d</td>
+<td>指定用户的家目录</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>指定此用户的使用期限，格式：YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>指定一个用户组，此组必须存在</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>指定默认的shell</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>指定用户的UID</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# useradd -d /home/testuser -s /sbin/nologin -u 8888 test</span><br><span class="line">[root@Lc ~]# id test</span><br><span class="line">uid=8888(test) gid=8888(test) 组=8888(test)</span><br></pre></td></tr></table></figure>
+<h2 id="2、passwd"><a href="#2、passwd" class="headerlink" title="2、passwd"></a>2、passwd</h2><blockquote>
+<p> 设置/修改用户的密码</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-l</td>
+<td>锁定用户禁止登陆</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>解除锁定，允许用户登录</td>
+</tr>
+<tr>
+<td>–stdin</td>
+<td>允许从标准输入修改密码</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>强制用户下次登录时修改密码</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>显示登录用户的密码状态</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>使账号无密码</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@Lc ~]# passwd -S root</span><br><span class="line">root PS 2018-01-30 0 99999 7 -1 (密码已设置，使用 SHA512 加密。)</span><br><span class="line"></span><br><span class="line"># 如果未设置密码，未状态如下</span><br><span class="line"></span><br><span class="line">[root@Lc ~]# passwd -S test</span><br><span class="line">test LK 2018-04-05 0 99999 7 -1 (密码已被锁定。)</span><br></pre></td></tr></table></figure>
+<h2 id="3、userdel"><a href="#3、userdel" class="headerlink" title="3、userdel"></a>3、userdel</h2><blockquote>
+<p>删除用户</p>
+</blockquote>
+<ul>
+<li>-f：强制删除用户，家目录及文件</li>
+<li>-d：删除用户，家目录及文件</li>
+</ul>
+<h2 id="4、usermod"><a href="#4、usermod" class="headerlink" title="4、usermod"></a>4、usermod</h2><blockquote>
+<p>修改用户的属性</p>
+</blockquote>
+<p><img src="http://obgutsg63.bkt.clouddn.com/blog/1531493919611.jpg" alt="usermod"></p>
+<h2 id="5、groupadd"><a href="#5、groupadd" class="headerlink" title="5、groupadd"></a>5、groupadd</h2><blockquote>
+<p>创建群组</p>
+</blockquote>
+<h1 id="打包压缩文件命令"><a href="#打包压缩文件命令" class="headerlink" title="打包压缩文件命令"></a>打包压缩文件命令</h1><h2 id="1、tar"><a href="#1、tar" class="headerlink" title="1、tar"></a>1、tar</h2><blockquote>
+<p>用于对文件打包或压缩</p>
+</blockquote>
+<p>1.1、打包并压缩文件 tar -czvf 压缩包名.tar.gz 文件名<br>1.2、解压并展开压缩包 tar -xzvf 压缩包名.tar.gz</p>
+<p>tar命令只是一个打包命令，本身不对文件进行压缩，进行压缩要结合<code>zip</code>命令。</p>
+<h1 id="文件查询命令"><a href="#文件查询命令" class="headerlink" title="文件查询命令"></a>文件查询命令</h1><h2 id="1、grep"><a href="#1、grep" class="headerlink" title="1、grep"></a>1、grep</h2><blockquote>
+<p>对文本进行搜索</p>
+</blockquote>
+<h2 id="2、find"><a href="#2、find" class="headerlink" title="2、find"></a>2、find</h2><blockquote>
+<p>用于查找文件</p>
+</blockquote>
+</div><div class="tags"></div><div class="post-share"><div class="bdsharebuttonbox"><span style="float:left;line-height: 28px;height: 28px;font-size:16px;font-weight:blod">分享到：</span><a href="#" data-cmd="more" class="bds_more"></a><a href="#" data-cmd="mshare" title="分享到一键分享" class="bds_mshare"></a><a href="#" data-cmd="fbook" title="分享到Facebook" class="bds_fbook"></a><a href="#" data-cmd="twi" title="分享到Twitter" class="bds_twi"></a><a href="#" data-cmd="linkedin" title="分享到linkedin" class="bds_linkedin"></a><a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a><a href="#" data-cmd="evernotecn" title="分享到印象笔记" class="bds_evernotecn"></a><a href="#" data-cmd="weixin" title="分享到微信" class="bds_weixin"></a><a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a><a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a></div></div><div class="post-nav"><a href="/2018/07/14/linux就该这么学-3/" class="pre">linux就该这么学-3</a><a href="/2018/07/12/linux就该这么学-1/" class="next">linux就该这么学-1</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础命令"><span class="toc-text">基础命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、echo"><span class="toc-text">1、echo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、date"><span class="toc-text">2、date</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、reboot"><span class="toc-text">3、reboot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、wget"><span class="toc-text">4、wget</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、elinks"><span class="toc-text">5、elinks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、shutdown"><span class="toc-text">6、shutdown</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#系统状态检测命令"><span class="toc-text">系统状态检测命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、ifconfig"><span class="toc-text">1、ifconfig</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、uname"><span class="toc-text">2、uname</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、uptime"><span class="toc-text">3、uptime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、free"><span class="toc-text">4、free</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、who"><span class="toc-text">5、who</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、last"><span class="toc-text">6、last</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、history"><span class="toc-text">7、history</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工作目录切换命令"><span class="toc-text">工作目录切换命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、pwd"><span class="toc-text">1、pwd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、cd"><span class="toc-text">2、cd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、ls"><span class="toc-text">3、ls</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文本编辑命令"><span class="toc-text">文本编辑命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、cat"><span class="toc-text">1、cat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、more"><span class="toc-text">2、more</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、head"><span class="toc-text">3、head</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、tail"><span class="toc-text">4、tail</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、od"><span class="toc-text">5、od</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、tr"><span class="toc-text">6、tr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、wc"><span class="toc-text">7、wc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、cut"><span class="toc-text">8、cut</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9、diff"><span class="toc-text">9、diff</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件目录管理命令"><span class="toc-text">文件目录管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、touch"><span class="toc-text">1、touch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、mkdir"><span class="toc-text">2、mkdir</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、cp"><span class="toc-text">3、cp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、mv"><span class="toc-text">4、mv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、rm"><span class="toc-text">5、rm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、dd"><span class="toc-text">6、dd</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户与组管理命令"><span class="toc-text">用户与组管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、useradd"><span class="toc-text">1、useradd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、passwd"><span class="toc-text">2、passwd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、userdel"><span class="toc-text">3、userdel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、usermod"><span class="toc-text">4、usermod</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、groupadd"><span class="toc-text">5、groupadd</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#打包压缩文件命令"><span class="toc-text">打包压缩文件命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、tar"><span class="toc-text">1、tar</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件查询命令"><span class="toc-text">文件查询命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、grep"><span class="toc-text">1、grep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、find"><span class="toc-text">2、find</span></a></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/18/logcat命令行工具/">logcat命令行工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/17/如何寻找真实ip/">如何寻找真实ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/16/linux安装metasploit/">linux安装metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/15/Mobile-Security-Framework-MobSF/">Mobile-Security-Framework-MobSF</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/14/linux就该这么学-3/">linux就该这么学-3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/13/linux就该这么学-2/">linux就该这么学-2</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/12/linux就该这么学-1/">linux就该这么学-1</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/10/突然间失落/">突然间失落</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/09/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/黑客与画家-三-不能说的话/">黑客与画家-三-不能说的话</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍分享/">书籍分享</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习/">学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透/">渗透</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/漏洞描述/">漏洞描述</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/阅读/">阅读</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/web信息收集/" style="font-size: 15px;">web信息收集</a> <a href="/tags/burp-suite/" style="font-size: 15px;">burp suite</a> <a href="/tags/crond-crondtab/" style="font-size: 15px;">crond,crondtab</a> <a href="/tags/nmap/" style="font-size: 15px;">nmap</a> <a href="/tags/sqlmap/" style="font-size: 15px;">sqlmap</a> <a href="/tags/渗透/" style="font-size: 15px;">渗透</a> <a href="/tags/web后门/" style="font-size: 15px;">web后门</a> <a href="/tags/crondtab/" style="font-size: 15px;">crondtab</a> <a href="/tags/书籍/" style="font-size: 15px;">书籍</a> <a href="/tags/web安全/" style="font-size: 15px;">web安全</a> <a href="/tags/漏洞描述-解决建议/" style="font-size: 15px;">漏洞描述 解决建议</a> <a href="/tags/移动应用/" style="font-size: 15px;">移动应用</a> <a href="/tags/系统漏洞/" style="font-size: 15px;">系统漏洞</a> <a href="/tags/勒索软件/" style="font-size: 15px;">勒索软件</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="http://www.ggsec.cn/" title="ggsec" target="_blank">ggsec</a><ul></ul><a href="http://www.secice.cn/" title="iceH_Blog" target="_blank">iceH_Blog</a><ul></ul><a href="http://www.errorsec.top/" title="errorsec" target="_blank">errorsec</a><ul></ul><a href="http://www.doubleyi.xin/" title="DOUBLE翊" target="_blank">DOUBLE翊</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Site Haritası</a> |  <a href="/atom.xml">订阅</a> |  <a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">凉城Lc.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.1" async></script><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","qzone","linkedin","fbook","twi","print","renren","sqq","evernotecn","bdysc","tqq","tqf","bdxc","kaixin001","tieba","douban","bdhome","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","h163","copy"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||head).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script></body></html>

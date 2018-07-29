@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="等我对自己很满意的时候，再预谋一场艳遇，岂不美哉。"><title>linux取证分析 | 凉城Lc</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">linux取证分析</h1><a id="logo" href="/.">凉城Lc</a><p class="description">真正的不自由，是在自己的心中设下牢笼</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/categories/漏洞描述"><i class="fa fa-star"> 漏洞描述</i></a><a href="/安全导航/"><i class="fa fa-share"> 安全导航</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">linux取证分析</h1><div class="post-meta"><a href="/2018/04/20/linux取证分析/#comments" class="comment-count"></a><p><span class="date">Apr 20, 2018</span><span><a href="/categories/linux/" class="category">linux</a></span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><h1 id="linux取证分析"><a href="#linux取证分析" class="headerlink" title="linux取证分析"></a>linux取证分析</h1><p>@(C1-linux)</p>
+<p><img src="http://obgutsg63.bkt.clouddn.com/blog/wallhaven-640380.jpg" alt="enter description here" title="wallhaven-640380"></p>
+<blockquote>
+<p>如果linux系统遭到了入侵，怎样对linux进行入侵分析呢？在分析阶段，熟悉linux下工具的使用非常重要，主要包括了日志文件、异常进程排查、异常文件分析等。</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># w</span></span><br><span class="line"><span class="comment"># 显示当前登录系统的所有用户</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-18_21-57-03.png" alt="1"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># lastlog</span></span><br><span class="line"><span class="comment"># 显示最近登录操作系统的所有用户，引用/var/log/lastlog二进制文件中的信息</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-18_22-05-13.png" alt="2"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  last</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出当前和曾经登入系统的用户信息，它默认读取的是/var/log/wtmp文件的信息。</span></span><br><span class="line"><span class="comment"># 输出的内容包括：用户名、终端位置、登录源信息、开始时间、结束时间、持续时间。</span></span><br><span class="line"><span class="comment">#注意最后一行输出的是wtmp文件起始记录的时间。当然也可以通过last -f参数指定读取文件，可以是/var/log/btmp、/var/run/utmp</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-18_22-02-16.png" alt="3"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># lastb</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看登录失败的用户,默认读取的是/var/log/btmp中文件的信息</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-20_14-40-46.png" alt="5"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示当前登录用户的信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># who</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-20_14-47-15.png" alt="6"></p>
+<hr>
+<p><strong>二进制文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/var/run/utmp：记录当前正在登录系统的用户信息，默认由who和w记录当前登录用户的信息，uptime记录系统启动时间；</span><br><span class="line"></span><br><span class="line">/var/log/wtmp：记录当前正在登录和历史登录系统的用户信息，默认由last命令查看；</span><br><span class="line"></span><br><span class="line">/var/log/btmp：记录失败的登录尝试信息，默认由lastb命令查看。</span><br></pre></td></tr></table></figure>
+<p><strong>如何查看二进制文件的内容</strong></p>
+<blockquote>
+<p>1、xxd</p>
+</blockquote>
+<p>xdd /var/log/wtmp</p>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-20_14-03-15.png" alt="4"></p>
+<blockquote>
+<p>2、last -f /var/log/wtmp,同样可以查看<code>/var/log/*tmp</code>文件中的内容</p>
+</blockquote>
+<blockquote>
+<p>3、utmpdump(推荐)</p>
+</blockquote>
+<blockquote>
+<p>3.1 utmpdump [options] filename</p>
+</blockquote>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-20_16-00-23.png" alt="7"></p>
+<blockquote>
+<p>输出格式说明</p>
+</blockquote>
+<ul>
+<li>1、显示会话识别符</li>
+<li>2、PID</li>
+<li>3、以下值：<ul>
+<li>– ： 运行等级改变/重启</li>
+<li>bw ： 启动守护进程</li>
+<li>数字： 表示tty号</li>
+</ul>
+</li>
+<li>4、可为空/用户名/重启/运行级别</li>
+<li>5、主tty/pty(伪终端)</li>
+<li>6、远程主机名(本地登录为空，返回内核版本)</li>
+<li>7、远程系统的IP地址(本地为0.0.0.0)</li>
+<li>8、该记录创建的日期和时间</li>
+</ul>
+<p>在/var/log/wtmp中，会话标识符为1的代表一次新的登录时间的特征，会话标识符8表示登出事件的特征。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 输出特定的字段</span><br><span class="line"></span><br><span class="line"># utmpdump /var/log/wtmp | grep -E &quot;\[7].*airs&quot; | awk -v OFS=&quot;,&quot; &apos;BEGIN &#123;FS=&quot;]&quot;&#125;;&#123;print $2,$4,$7,$8&#125;&apos; | sed -e &apos;s/\[//g&apos; -e &apos;s/\]//g&apos;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>3.2 修改utmp或wtmp等二进制文件</p>
+</blockquote>
+<ul>
+<li><code># utmpdump /var/log/utmp &gt; tmp_output</code></li>
+<li><code>&lt;使用文本编辑器修改 tmp_output&gt;</code></li>
+<li><code># utmpdump -r tmp_output &gt; /var/log/utmp</code></li>
+</ul>
+<hr>
+<p><strong>查完了用户登录之后，查看流量和进程相关的情况：</strong></p>
+<p>流量：</p>
+<blockquote>
+<p>top</p>
+</blockquote>
+<blockquote>
+<p>iftop</p>
+</blockquote>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-21_23-55-11.png" alt="0"></p>
+<blockquote>
+<p>nethogs</p>
+</blockquote>
+<p>安装nethogs：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install nethogs</span><br><span class="line"></span><br><span class="line">apt-get install nethogs</span><br></pre></td></tr></table></figure>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-21_23-58-28.png" alt="10"></p>
+<p>上图中的PID为3248和3218的进程存在问题，直接查看进程ID号，进程相关的东西都存放在/proc/PID下。</p>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-22_00-04-11.png" alt="11"></p>
+<p>利用strace对PID进行追踪。</p>
+<blockquote>
+<p><code>strace -tt -p 3218</code></p>
+</blockquote>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-22_00-10-20.png" alt="12"></p>
+<p>进程：</p>
+<p>注意UID为0的进程</p>
+<blockquote>
+<p>ps -ef</p>
+</blockquote>
+<p>检查隐藏进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># ps -ef | awk &apos;&#123;print &#125;&apos; | sort -n | uniq &gt;1</span><br><span class="line"></span><br><span class="line"># ls /porc |sort -n|uniq &gt;2</span><br><span class="line"></span><br><span class="line"># diff 1 2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>lsof -p PID</p>
+</blockquote>
+<p>查看该进程所有打开的文件</p>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-22_00-18-10.png" alt="12"></p>
+<blockquote>
+<p>lsof -i</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lsof -i</span><br><span class="line">COMMAND    PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">dhclient  2970 root    6u  IPv4  25819      0t0  UDP *:bootpc</span><br><span class="line">udisks-da 3218 root    3u  IPv4  35724      0t0  TCP localhost:42070-&gt;122.224.32.32:6009 (SYN_SENT)</span><br><span class="line">udisks-da 3248 root    3u  IPv4  37848      0t0  TCP localhost:42072-&gt;122.224.32.32:6009 (SYN_SENT)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>netstat -tlunp</p>
+</blockquote>
+<p>检查系统后门：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># cat /etc/crontab</span><br><span class="line"># ls /var/spool/cron/</span><br><span class="line"># cat /etc/rc.d/rc.local</span><br><span class="line"># ls /etc/rc.d</span><br><span class="line"># ls /etc/rc3.d</span><br></pre></td></tr></table></figure>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-22_15-48-27.png" alt="132"></p>
+<p><a href="https://www.cnblogs.com/kevingrace/p/5895116.html" target="_blank" rel="noopener">更多查看</a></p>
+<hr>
+<h1 id="strace"><a href="#strace" class="headerlink" title="strace"></a>strace</h1><blockquote>
+<p>strace命令是一个集诊断、调试、统计与一体的工具，我们可以使用strace对应用的系统调用和信号传递的跟踪结果来对应用进行分析，以达到解决问题或者是了解应用工作过程的目的。当然strace与专业的调试工具比如说gdb之类的是没法相比的，因为它不是一个专业的调试器。</p>
+</blockquote>
+<p><a href="http://man.linuxde.net/strace" target="_blank" rel="noopener">strace具体用法</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># file ./udisks-daemon</span></span><br><span class="line">./udisks-daemon: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, <span class="keyword">for</span> GNU/Linux 2.6.4, not stripped</span><br></pre></td></tr></table></figure>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-21_23-23-40.png" alt="9"></p>
+<p>来自：<a href="https://www.anquanke.com/post/id/82796" target="_blank" rel="noopener">https://www.anquanke.com/post/id/82796</a></p>
+<p>是一种病毒文件，对病毒文件进行跟踪，发现连接的ip及端口。</p>
+<p><img src="http://obgutsg63.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720180121231637.jpg" alt="8"></p>
+<hr>
+<p>病毒扫描</p>
+<p>ClamAV</p>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-23_11-33-13.png" alt="13"></p>
+<p>1、安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># yum install -y epel-release</span><br><span class="line"></span><br><span class="line"># yum install -y clamav</span><br></pre></td></tr></table></figure>
+<p>2、更新病毒库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo freshclam</span><br></pre></td></tr></table></figure>
+<p><img src="http://obgutsg63.bkt.clouddn.com/Snipaste_2018-01-23_11-41-02.png" alt="14"></p>
+<p>3、如何使用</p>
+<p>clamav扫描使用clamavscan命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">扫描所有用户的主目录:clamavscan -r /home</span><br><span class="line"></span><br><span class="line">扫描根目录：clamav -r /</span><br><span class="line"></span><br><span class="line">扫描服务器上的所有文件并显示有问题的文件：clamav -r --bell -i /</span><br></pre></td></tr></table></figure>
+<p><img src="http://obgutsg63.bkt.clouddn.com/20180123114918.png" alt="14"></p>
+<p><img src="http://obgutsg63.bkt.clouddn.com/20180123115011.png" alt="15"></p>
+<p><img src="http://obgutsg63.bkt.clouddn.com/20180123115207.png" alt="16"></p>
+<p><a href="http://www.clamav.net" target="_blank" rel="noopener">ClamAV官网</a></p>
+<p><a href="http://wiki.ubuntu.org.cn/ClamAV" target="_blank" rel="noopener">ClamAV_HELP</a></p>
+<hr>
+<p>参考：</p>
+<p><a href="http://www.linuxidc.com/Linux/2014-11/109361.htm" target="_blank" rel="noopener">使用 utmpdump 监控 CentOS 用户登录历史</a></p>
+<p><a href="https://www.cnblogs.com/lizhaoxian/p/5981029.html" target="_blank" rel="noopener">Linux用户登录记录日志和相关查看命令汇总</a></p>
+<p><a href="https://bash-prompt.net/guides/server-hacked/" target="_blank" rel="noopener">How To Tell If Your Linux Server Has Been Compromised</a></p>
+<p><a href="https://www.cnblogs.com/kerrycode/p/4754820.html" target="_blank" rel="noopener">https://www.cnblogs.com/kerrycode/p/4754820.html</a></p>
+</div><div class="tags"></div><div class="post-share"><div class="bdsharebuttonbox"><span style="float:left;line-height: 28px;height: 28px;font-size:16px;font-weight:blod">分享到：</span><a href="#" data-cmd="more" class="bds_more"></a><a href="#" data-cmd="mshare" title="分享到一键分享" class="bds_mshare"></a><a href="#" data-cmd="fbook" title="分享到Facebook" class="bds_fbook"></a><a href="#" data-cmd="twi" title="分享到Twitter" class="bds_twi"></a><a href="#" data-cmd="linkedin" title="分享到linkedin" class="bds_linkedin"></a><a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a><a href="#" data-cmd="evernotecn" title="分享到印象笔记" class="bds_evernotecn"></a><a href="#" data-cmd="weixin" title="分享到微信" class="bds_weixin"></a><a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a><a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a></div></div><div class="post-nav"><a href="/2018/05/13/黑客与画家-三-不能说的话/" class="pre">黑客与画家-三-不能说的话</a><a href="/2018/03/01/记一次某医院勒索软件事件处理整理/" class="next">记一次某医院勒索软件事件处理整理</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#linux取证分析"><span class="toc-text">linux取证分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#strace"><span class="toc-text">strace</span></a></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/18/logcat命令行工具/">logcat命令行工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/17/如何寻找真实ip/">如何寻找真实ip</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/16/linux安装metasploit/">linux安装metasploit</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/15/Mobile-Security-Framework-MobSF/">Mobile-Security-Framework-MobSF</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/14/linux就该这么学-3/">linux就该这么学-3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/13/linux就该这么学-2/">linux就该这么学-2</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/12/linux就该这么学-1/">linux就该这么学-1</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/10/突然间失落/">突然间失落</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/09/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/13/黑客与画家-三-不能说的话/">黑客与画家-三-不能说的话</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍分享/">书籍分享</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/学习/">学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/渗透/">渗透</a><span class="category-list-count">18</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/漏洞描述/">漏洞描述</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/阅读/">阅读</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随笔/">随笔</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/web信息收集/" style="font-size: 15px;">web信息收集</a> <a href="/tags/burp-suite/" style="font-size: 15px;">burp suite</a> <a href="/tags/crond-crondtab/" style="font-size: 15px;">crond,crondtab</a> <a href="/tags/nmap/" style="font-size: 15px;">nmap</a> <a href="/tags/sqlmap/" style="font-size: 15px;">sqlmap</a> <a href="/tags/渗透/" style="font-size: 15px;">渗透</a> <a href="/tags/web后门/" style="font-size: 15px;">web后门</a> <a href="/tags/crondtab/" style="font-size: 15px;">crondtab</a> <a href="/tags/书籍/" style="font-size: 15px;">书籍</a> <a href="/tags/web安全/" style="font-size: 15px;">web安全</a> <a href="/tags/漏洞描述-解决建议/" style="font-size: 15px;">漏洞描述 解决建议</a> <a href="/tags/移动应用/" style="font-size: 15px;">移动应用</a> <a href="/tags/系统漏洞/" style="font-size: 15px;">系统漏洞</a> <a href="/tags/勒索软件/" style="font-size: 15px;">勒索软件</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="http://www.ggsec.cn/" title="ggsec" target="_blank">ggsec</a><ul></ul><a href="http://www.secice.cn/" title="iceH_Blog" target="_blank">iceH_Blog</a><ul></ul><a href="http://www.errorsec.top/" title="errorsec" target="_blank">errorsec</a><ul></ul><a href="http://www.doubleyi.xin/" title="DOUBLE翊" target="_blank">DOUBLE翊</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Site Haritası</a> |  <a href="/atom.xml">订阅</a> |  <a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">凉城Lc.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.1" async></script><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","qzone","linkedin","fbook","twi","print","renren","sqq","evernotecn","bdysc","tqq","tqf","bdxc","kaixin001","tieba","douban","bdhome","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","h163","copy"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||head).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script></body></html>
